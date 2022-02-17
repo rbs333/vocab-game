@@ -1,0 +1,90 @@
+.header {
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 2px;
+    padding: 2rem 0;
+}
+
+.header .titlebox {
+    color:  white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+    padding: 0 .25rem;
+}
+
+.header nav {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.35rem;
+    padding-top: .75rem;
+}
+
+
+.socialLinks {
+    position: fixed;
+    top: 50%;
+    transform: translate(120%, -80%);
+}
+
+@media only screen and (max-width: 800px) {
+    .header a {
+        padding: 0 .15rem;
+    }
+
+    .header nav {
+        font-size: 1.15rem;
+    }
+
+    .socialLinks a img {
+        display: none;
+    }
+}
+
+.header a:hover {
+    color:  tan;
+}
+
+.header .titlebox .title {
+    font-size: 2.5rem;
+}
+
+.title .subHeading {
+    font-style: italic;
+}
+
+.balloonIcon {
+    width: 8rem;
+}
+
+h1 {
+    padding: 2rem 0;
+}
+
+h1 a {
+    color: black;
+    background-color: tan;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+h1 a:hover {
+    cursor: pointer;
+}
+
+.footer {
+    display: absolute;
+    bottom: 0;
+    background-color: black;
+    text-align: center;
+    color: white;
+    font-size: 1.25rem;
+    padding: 1rem 0;
+}
+

@@ -1,0 +1,12 @@
+<p>game works!</p>
+
+<input type="text" placeholder="type guess here" [(ngModel)]="inputText">
+<input type="submit" (click)="onSubmit()">
+
+{{inputText}}
+
+<div *ngIf="guesses[0].guess">
+    <span *ngFor="let l of guesses[0].letterCheck">
+       | {{l.char}} {{l.inWord}} {{l.inSpot}} |
+    </span>
+</div>
