@@ -1,12 +1,69 @@
-<p>game works!</p>
 
-<input type="text" placeholder="type guess here" [(ngModel)]="inputText">
-<input type="submit" (click)="onSubmit()">
+Rules:
+<ul>
+    <li><span class="green">Green</span> means the letter is in the correct place.</li>
+    <li><span class="yellow">Yellow</span> means the letter is in the word but incorrect place.</li>
+    <li><span class="grey">Grey</span> the letter is not in the word.</li>
+</ul>
 
-{{inputText}}
+The vocab word is <strong>{{ansLen}}</strong> letters long.
+You have <strong>{{5 - guessCount}}</strong> guesses left.
 
-<div *ngIf="guesses[0].guess">
-    <span *ngFor="let l of guesses[0].letterCheck">
-       | {{l.char}} {{l.inWord}} {{l.inSpot}} |
+<input 
+    type="text" 
+    placeholder="type guess here" 
+    [(ngModel)]="inputText" 
+    [disabled]="guessCount >= 5 ? true : false"
+>
+
+<button type="submit" (click)="onSubmit()">Go</button>
+
+<div *ngIf="guesses[0].guess" class="guess-output-wrapper">
+    <span 
+        *ngFor="let l of guesses[0].letterCheck"
+        class="output-box"
+        [ngClass]="getStyles(l)"
+    >
+        {{l.char}}
+    </span>
+</div>
+
+<div *ngIf="guesses[1].guess" class="guess-output-wrapper">
+    <span 
+        *ngFor="let l of guesses[1].letterCheck"
+        class="output-box"
+        [ngClass]="getStyles(l)"
+    >
+        {{l.char}}
+    </span>
+</div>
+
+<div *ngIf="guesses[2].guess" class="guess-output-wrapper">
+    <span 
+        *ngFor="let l of guesses[2].letterCheck"
+        class="output-box"
+        [ngClass]="getStyles(l)"
+    >
+        {{l.char}}
+    </span>
+</div>
+
+<div *ngIf="guesses[3].guess" class="guess-output-wrapper">
+    <span 
+        *ngFor="let l of guesses[3].letterCheck"
+        class="output-box"
+        [ngClass]="getStyles(l)"
+    >
+        {{l.char}}
+    </span>
+</div>
+
+<div *ngIf="guesses[4].guess" class="guess-output-wrapper">
+    <span 
+        *ngFor="let l of guesses[4].letterCheck"
+        class="output-box"
+        [ngClass]="getStyles(l)"
+    >
+        {{l.char}}
     </span>
 </div>

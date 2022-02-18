@@ -10,10 +10,13 @@ export class GameComponent implements OnInit {
   vocab = [
     "random",
     "words",
-    "guess"
+    "guess",
+    "bear"
   ];
 
   answer: string;
+  ansLen: number;
+
   inputText: string;
 
   guess1: string;
@@ -30,6 +33,7 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.answer = this.randomVocab();
+    this.ansLen = this.answer.length;
     this.guesses = [
       {guess: this.guess1, correct: false, letterCheck: []},
       {guess: this.guess2, correct: false, letterCheck: []},
@@ -40,15 +44,25 @@ export class GameComponent implements OnInit {
   }
 
   randomVocab(): string {
-    return this.vocab[0]
+    return this.vocab[3]
   }
 
   onSubmit(): void {
     if (!this.inputText) {
       alert("please enter guess");
-      return
+      return;
     }
 
+    if (this.inputText.length != this.answer.length) {
+      alert(`Guess must be ${this.answer.length} letters`);
+      return;
+    }
+
+    if (this.guessCount >= 5) {
+      alert('You are out of guesses!')
+    }
+
+    console.log(this.guessCount)
     this.guesses[this.guessCount].guess = this.inputText;
 
     if (this.guesses[this.guessCount].guess === this.answer) {
@@ -57,13 +71,15 @@ export class GameComponent implements OnInit {
     } else {
       this.guesses[this.guessCount].letterCheck = this.checkGuess(this.guesses[this.guessCount].guess);
     }
+
+    this.guessCount++;
   }
 
   checkGuess(guess) {
     const letterCheck = []
-    console.log(typeof guess, guess)
+    // console.log(typeof guess, guess)
     for (const [i, g] of guess.split('').entries()) {
-      console.log(i, g)
+      // console.log(i, g)
       if (!this.answer.includes(g)) {
         letterCheck.push({char: g, inWord: false, inSpot: false});
       }
@@ -78,4 +94,13 @@ export class GameComponent implements OnInit {
     return letterCheck;
   }
 
+  getStyles(guessChar: any): string {
+    if (guessChar.inWord && guessChar.inSpot) {
+      return 'green';
+    } else if (guessChar.inWord) {
+      return 'yellow';
+    } else {
+      return 'grey';
+    }
+  }
 }
