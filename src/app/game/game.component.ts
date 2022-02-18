@@ -7,12 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameComponent implements OnInit {
 
-  vocab = [
-    "random",
-    "words",
-    "guess",
-    "bear"
+  spanishVocab = [
+    {word: 'Grapa', def: 'Staple'},
+    {word: 'Grasa', def: 'Grease'},
+    {word: 'Pluma', def: 'pen'},
+    {word: 'lluvia', def:'rain'}
   ];
+
+  frenchVocab = [
+    {word: 'agrafe', def: 'Staple'},
+    {word: 'graisse', def: 'Grease'},
+    {word: 'stylo', def: 'pen'},
+    {word: 'pluie', def:'rain'}
+  ];
+
+  vocab: string[];
+
+  showRules = false;
+  endText: string;
 
   answer: string;
   ansLen: number;
@@ -32,7 +44,7 @@ export class GameComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.answer = this.randomVocab();
+    this.answer = this.randomVocab('spanish').toLowerCase();
     this.ansLen = this.answer.length;
     this.guesses = [
       {guess: this.guess1, correct: false, letterCheck: []},
@@ -43,8 +55,17 @@ export class GameComponent implements OnInit {
     ]
   }
 
-  randomVocab(): string {
-    return this.vocab[3]
+  randomVocab(type): string {
+    switch (type) {
+      case 'spanish':
+        this.vocab = this.spanishVocab.map(v => v.word) 
+      case 'french':
+        this.vocab = this.frenchVocab.map(v => v.word) 
+      default:
+        this.vocab = this.spanishVocab.map(v => v.word)
+    }
+
+    return this.vocab[Math.floor(Math.random()*this.vocab.length)];
   }
 
   onSubmit(): void {
@@ -63,11 +84,12 @@ export class GameComponent implements OnInit {
     }
 
     console.log(this.guessCount)
-    this.guesses[this.guessCount].guess = this.inputText;
+    this.guesses[this.guessCount].guess = this.inputText.toLowerCase();
 
     if (this.guesses[this.guessCount].guess === this.answer) {
-      alert('You got it!');
       this.guesses[this.guessCount].correct = true;
+      this.guesses[this.guessCount].letterCheck = this.checkGuess(this.guesses[this.guessCount].guess);
+      this.endText = 'You got it!!!';
     } else {
       this.guesses[this.guessCount].letterCheck = this.checkGuess(this.guesses[this.guessCount].guess);
     }
@@ -77,9 +99,7 @@ export class GameComponent implements OnInit {
 
   checkGuess(guess) {
     const letterCheck = []
-    // console.log(typeof guess, guess)
     for (const [i, g] of guess.split('').entries()) {
-      // console.log(i, g)
       if (!this.answer.includes(g)) {
         letterCheck.push({char: g, inWord: false, inSpot: false});
       }
@@ -98,9 +118,13 @@ export class GameComponent implements OnInit {
     if (guessChar.inWord && guessChar.inSpot) {
       return 'green';
     } else if (guessChar.inWord) {
-      return 'yellow';
+      return 'orange';
     } else {
       return 'grey';
     }
+  }
+
+  toggleRules() {
+    this.showRules = !this.showRules;
   }
 }

@@ -1,29 +1,53 @@
-.green {
-    background: green;
+.game-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.yellow {
-    background: yellow;
+.green {
+    background: #8CB369;
+}
+
+.orange {
+    background: #F4A259;
 }
 
 .grey {
-    background: grey;
+    background: lightgrey;
 }
 
 .guess-output-wrapper {
     display: flex;
 }
 
+.hint-text {
+    text-align: center;
+}
+
 button {
     margin: 0 0.5rem;
 }
+
+.input-wrap {
+    margin-bottom: 1rem;
+}
+
 .output-box {
     display: flex;
     justify-content: center;
     align-content: center;
-    height: 3rem;
-    width: 3rem;
+    height: 2.5rem;
+    width: 2.5rem;
     border: 2px solid black;
-    font-size: 2rem;
-    margin: 1rem;
+    font-size: 1.5rem;
+    margin: 0.5rem;
+}
+
+.rules-btn {
+    border: none;
+    margin: 0;
+}
+
+.rules {
+    padding: 1rem;
 }

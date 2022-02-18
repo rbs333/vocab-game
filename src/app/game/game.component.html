@@ -1,69 +1,87 @@
+<div class="game-wrapper">
+    <button *ngIf="!showRules" (click)="toggleRules()" class="rules-btn">[Show rules]</button>
+    <button *ngIf="showRules" (click)="toggleRules()" class="rules-btn">[Close rules]</button>
 
-Rules:
-<ul>
-    <li><span class="green">Green</span> means the letter is in the correct place.</li>
-    <li><span class="yellow">Yellow</span> means the letter is in the word but incorrect place.</li>
-    <li><span class="grey">Grey</span> the letter is not in the word.</li>
-</ul>
+    <div *ngIf="showRules" class="rules">
+        Rules:
+        <ul>
+            <li>Enter a guess!</li>
+            <li><span class="green">Green</span> means the letter is correct and in the correct place.</li>
+            <li><span class="orange">Orange</span> means the letter is in the word but not in the correct place.</li>
+            <li><span class="grey">Grey</span> means the letter is not in the word.</li>
+        </ul>
+    </div>
 
-The vocab word is <strong>{{ansLen}}</strong> letters long.
-You have <strong>{{5 - guessCount}}</strong> guesses left.
+    <hr>
 
-<input 
-    type="text" 
-    placeholder="type guess here" 
-    [(ngModel)]="inputText" 
-    [disabled]="guessCount >= 5 ? true : false"
->
+    <div class="hint-text">
+        The vocab word is <strong>{{ansLen}}</strong> letters long.
+        You have <strong>{{5 - guessCount}}</strong> guesses left.
+    </div>
 
-<button type="submit" (click)="onSubmit()">Go</button>
+    <div class="input-wrap">
+        <input 
+            type="text" 
+            placeholder="type guess here" 
+            [(ngModel)]="inputText" 
+            [disabled]="guessCount >= 5 ? true : false"
+        >
+        
+        <button type="submit" (click)="onSubmit()">Go</button>
+    </div>
 
-<div *ngIf="guesses[0].guess" class="guess-output-wrapper">
-    <span 
-        *ngFor="let l of guesses[0].letterCheck"
-        class="output-box"
-        [ngClass]="getStyles(l)"
-    >
-        {{l.char}}
-    </span>
-</div>
+    <div *ngIf="guesses[0].guess" class="guess-output-wrapper">
+        <span 
+            *ngFor="let l of guesses[0].letterCheck"
+            class="output-box"
+            [ngClass]="getStyles(l)"
+        >
+            {{l.char}}
+        </span>
+    </div>
 
-<div *ngIf="guesses[1].guess" class="guess-output-wrapper">
-    <span 
-        *ngFor="let l of guesses[1].letterCheck"
-        class="output-box"
-        [ngClass]="getStyles(l)"
-    >
-        {{l.char}}
-    </span>
-</div>
+    <div *ngIf="guesses[1].guess" class="guess-output-wrapper">
+        <span 
+            *ngFor="let l of guesses[1].letterCheck"
+            class="output-box"
+            [ngClass]="getStyles(l)"
+        >
+            {{l.char}}
+        </span>
+    </div>
 
-<div *ngIf="guesses[2].guess" class="guess-output-wrapper">
-    <span 
-        *ngFor="let l of guesses[2].letterCheck"
-        class="output-box"
-        [ngClass]="getStyles(l)"
-    >
-        {{l.char}}
-    </span>
-</div>
+    <div *ngIf="guesses[2].guess" class="guess-output-wrapper">
+        <span 
+            *ngFor="let l of guesses[2].letterCheck"
+            class="output-box"
+            [ngClass]="getStyles(l)"
+        >
+            {{l.char}}
+        </span>
+    </div>
 
-<div *ngIf="guesses[3].guess" class="guess-output-wrapper">
-    <span 
-        *ngFor="let l of guesses[3].letterCheck"
-        class="output-box"
-        [ngClass]="getStyles(l)"
-    >
-        {{l.char}}
-    </span>
-</div>
+    <div *ngIf="guesses[3].guess" class="guess-output-wrapper">
+        <span 
+            *ngFor="let l of guesses[3].letterCheck"
+            class="output-box"
+            [ngClass]="getStyles(l)"
+        >
+            {{l.char}}
+        </span>
+    </div>
 
-<div *ngIf="guesses[4].guess" class="guess-output-wrapper">
-    <span 
-        *ngFor="let l of guesses[4].letterCheck"
-        class="output-box"
-        [ngClass]="getStyles(l)"
-    >
-        {{l.char}}
-    </span>
+    <div *ngIf="guesses[4].guess" class="guess-output-wrapper">
+        <span 
+            *ngFor="let l of guesses[4].letterCheck"
+            class="output-box"
+            [ngClass]="getStyles(l)"
+        >
+            {{l.char}}
+        </span>
+    </div>
+
+    <div *ngIf="endText || guessCount >= 5" class="end-text">
+        <h1 *ngIf="endText">{{endText}}</h1>
+        <h2>The correct answer is {{answer}}</h2>
+    </div>
 </div>

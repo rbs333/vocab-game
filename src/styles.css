@@ -51,7 +51,17 @@ button {
 }
 
 button:hover {
-    background-color: tan;
+    background-color: #F4E285;
+}
+
+button:focus {
+    background-color: #F4E285;
+}
+
+input {
+    font-size: 1.15rem;
+    margin: 0 0.5rem;
+    padding: 0.5rem;
 }
 
 @media (max-width: 800px) {

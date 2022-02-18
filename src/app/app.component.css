@@ -1,9 +1,8 @@
 .header {
-    background-color: black;
-    color: white;
+    background-color: #5b8e7d;
     text-align: center;
     border-radius: 2px;
-    padding: 2rem 0;
+    padding: 1rem 0;
 }
 
 .header .titlebox {
@@ -81,7 +80,7 @@ h1 a:hover {
 .footer {
     display: absolute;
     bottom: 0;
-    background-color: black;
+    background-color: #5b8e7d;
     text-align: center;
     color: white;
     font-size: 1.25rem;
