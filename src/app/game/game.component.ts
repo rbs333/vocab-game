@@ -1,24 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css']
+  selector: "app-game",
+  templateUrl: "./game.component.html",
+  styleUrls: ["./game.component.css"],
 })
 export class GameComponent implements OnInit {
-
   spanishVocab = [
-    {word: 'Grapa', def: 'Staple'},
-    {word: 'Grasa', def: 'Grease'},
-    {word: 'Pluma', def: 'pen'},
-    {word: 'lluvia', def:'rain'}
+    { word: "Grapa", def: "Staple" },
+    { word: "Grasa", def: "Grease" },
+    { word: "Pluma", def: "pen" },
+    { word: "lluvia", def: "rain" },
   ];
 
   frenchVocab = [
-    {word: 'agrafe', def: 'Staple'},
-    {word: 'graisse', def: 'Grease'},
-    {word: 'stylo', def: 'pen'},
-    {word: 'pluie', def:'rain'}
+    { word: "agrafe", def: "Staple" },
+    { word: "graisse", def: "Grease" },
+    { word: "stylo", def: "pen" },
+    { word: "pluie", def: "rain" },
   ];
 
   vocab: string[];
@@ -27,6 +26,7 @@ export class GameComponent implements OnInit {
   endText: string;
 
   answer: string;
+  answerDef: string;
   ansLen: number;
 
   inputText: string;
@@ -41,31 +41,34 @@ export class GameComponent implements OnInit {
 
   guessCount = 0;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    this.answer = this.randomVocab('spanish').toLowerCase();
+    this.randomVocab("spanish");
     this.ansLen = this.answer.length;
     this.guesses = [
-      {guess: this.guess1, correct: false, letterCheck: []},
-      {guess: this.guess2, correct: false, letterCheck: []},
-      {guess: this.guess3, correct: false, letterCheck: []},
-      {guess: this.guess4, correct: false, letterCheck: []},
-      {guess: this.guess5, correct: false, letterCheck: []}
-    ]
+      { guess: this.guess1, correct: false, letterCheck: [] },
+      { guess: this.guess2, correct: false, letterCheck: [] },
+      { guess: this.guess3, correct: false, letterCheck: [] },
+      { guess: this.guess4, correct: false, letterCheck: [] },
+      { guess: this.guess5, correct: false, letterCheck: [] },
+    ];
   }
 
-  randomVocab(type): string {
-    switch (type) {
-      case 'spanish':
-        this.vocab = this.spanishVocab.map(v => v.word) 
-      case 'french':
-        this.vocab = this.frenchVocab.map(v => v.word) 
+  randomVocab(type): void {
+    let index;
+    switch (type.toLowerCase()) {
+      case "spanish":
+        index = Math.floor(Math.random() * this.spanishVocab.length);
+        this.answer = this.spanishVocab[index].word.toLowerCase();
+        this.answerDef = this.spanishVocab[index].def;
+      case "french":
+        index = Math.floor(Math.random() * this.frenchVocab.length);
+        this.answer = this.frenchVocab[index].word.toLowerCase();
+        this.answerDef = this.frenchVocab[index].def;
       default:
-        this.vocab = this.spanishVocab.map(v => v.word)
+        console.log("option doesn't exist");
     }
-
-    return this.vocab[Math.floor(Math.random()*this.vocab.length)];
   }
 
   onSubmit(): void {
@@ -80,34 +83,35 @@ export class GameComponent implements OnInit {
     }
 
     if (this.guessCount >= 5) {
-      alert('You are out of guesses!')
+      alert("You are out of guesses!");
     }
 
-    console.log(this.guessCount)
     this.guesses[this.guessCount].guess = this.inputText.toLowerCase();
 
     if (this.guesses[this.guessCount].guess === this.answer) {
       this.guesses[this.guessCount].correct = true;
-      this.guesses[this.guessCount].letterCheck = this.checkGuess(this.guesses[this.guessCount].guess);
-      this.endText = 'You got it!!!';
+      this.guesses[this.guessCount].letterCheck = this.checkGuess(
+        this.guesses[this.guessCount].guess
+      );
+      this.endText = "You got it!!!";
     } else {
-      this.guesses[this.guessCount].letterCheck = this.checkGuess(this.guesses[this.guessCount].guess);
+      this.guesses[this.guessCount].letterCheck = this.checkGuess(
+        this.guesses[this.guessCount].guess
+      );
     }
 
     this.guessCount++;
   }
 
   checkGuess(guess) {
-    const letterCheck = []
-    for (const [i, g] of guess.split('').entries()) {
+    const letterCheck = [];
+    for (const [i, g] of guess.split("").entries()) {
       if (!this.answer.includes(g)) {
-        letterCheck.push({char: g, inWord: false, inSpot: false});
-      }
-      else if (this.answer[i] === g) {
-        letterCheck.push({char: g, inWord: true, inSpot: true});
-      }
-      else {
-        letterCheck.push({char: g, inWord: true, inSpot: false});
+        letterCheck.push({ char: g, inWord: false, inSpot: false });
+      } else if (this.answer[i] === g) {
+        letterCheck.push({ char: g, inWord: true, inSpot: true });
+      } else {
+        letterCheck.push({ char: g, inWord: true, inSpot: false });
       }
     }
 
@@ -116,11 +120,11 @@ export class GameComponent implements OnInit {
 
   getStyles(guessChar: any): string {
     if (guessChar.inWord && guessChar.inSpot) {
-      return 'green';
+      return "green";
     } else if (guessChar.inWord) {
-      return 'orange';
+      return "orange";
     } else {
-      return 'grey';
+      return "grey";
     }
   }
 

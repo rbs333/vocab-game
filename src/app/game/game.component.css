@@ -1,53 +1,55 @@
 .game-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .green {
-    background: #8CB369;
+  background: #8cb369;
 }
 
 .orange {
-    background: #F4A259;
+  background: #f4a259;
 }
 
 .grey {
-    background: lightgrey;
+  background: lightgrey;
 }
 
 .guess-output-wrapper {
-    display: flex;
+  display: flex;
 }
 
 .hint-text {
-    text-align: center;
+  text-align: center;
 }
 
 button {
-    margin: 0 0.5rem;
+  margin: 0 0.5rem;
 }
 
 .input-wrap {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .output-box {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    height: 2.5rem;
-    width: 2.5rem;
-    border: 2px solid black;
-    font-size: 1.5rem;
-    margin: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.25rem;
+  width: 2.25rem;
+  border: 2px solid black;
+  font-size: 1.5rem;
+  margin: 0.25rem;
 }
 
 .rules-btn {
-    border: none;
-    margin: 0;
+  border: none;
+  margin: 0;
 }
 
 .rules {
-    padding: 1rem;
+  padding: 1rem;
 }

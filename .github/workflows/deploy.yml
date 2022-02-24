@@ -14,7 +14,6 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 12
-      - run: sh src/assets/scripts/makeEnv.sh prod ${{ secrets.PUBLIC_STRIPE_KEY }} ${{ secrets.CHARGE_URL }} ${{ secrets.API_URL }}
       - run: npm install
       - run: npm run build:ci
       - uses: aws-actions/configure-aws-credentials@v1
