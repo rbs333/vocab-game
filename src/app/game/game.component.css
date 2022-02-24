@@ -24,6 +24,8 @@
 
 .hint-text {
   text-align: center;
+  max-width: 300px;
+  padding-bottom: 1rem;
 }
 
 button {
@@ -50,6 +52,19 @@ button {
   margin: 0;
 }
 
+.lang-btn {
+  border: none;
+  margin: 0;
+  font-style: italic;
+}
+
 .rules {
-  padding: 1rem;
+  padding: 1rem 0;
+  max-width: 300px;
+}
+
+.end-text {
+  max-width: 300px;
+  text-align: center;
+  padding: 1rem 0;
 }

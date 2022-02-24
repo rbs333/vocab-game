@@ -21,6 +21,7 @@ export class GameComponent implements OnInit {
   ];
 
   vocab: string[];
+  language: string = "spanish";
 
   showRules = false;
   endText: string;
@@ -44,7 +45,7 @@ export class GameComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.randomVocab("spanish");
+    this.randomVocab(this.language);
     this.ansLen = this.answer.length;
     this.guesses = [
       { guess: this.guess1, correct: false, letterCheck: [] },
@@ -57,15 +58,17 @@ export class GameComponent implements OnInit {
 
   randomVocab(type): void {
     let index;
-    switch (type.toLowerCase()) {
+    switch (type) {
       case "spanish":
         index = Math.floor(Math.random() * this.spanishVocab.length);
         this.answer = this.spanishVocab[index].word.toLowerCase();
         this.answerDef = this.spanishVocab[index].def;
+        break;
       case "french":
         index = Math.floor(Math.random() * this.frenchVocab.length);
         this.answer = this.frenchVocab[index].word.toLowerCase();
         this.answerDef = this.frenchVocab[index].def;
+        break;
       default:
         console.log("option doesn't exist");
     }
@@ -130,5 +133,10 @@ export class GameComponent implements OnInit {
 
   toggleRules() {
     this.showRules = !this.showRules;
+  }
+
+  toggleLang(lang) {
+    this.language = lang;
+    this.randomVocab(lang);
   }
 }
